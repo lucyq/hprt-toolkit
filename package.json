@@ -1,0 +1,36 @@
+{
+  "name": "hprt-toolkit",
+  "version": "0.0.0",
+  "description": "toolkit for clinicians from the Harvard Program in Refugee Trauma",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.10.0",
+    "ejs-locals": "~1.0.2",
+    "express": "~4.10.6",
+    "ejs": "~1.0.0",
+    "mongodb": "~1.4.26",
+    "nodemon": "~1.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucyq/hprt-toolkit"
+  },
+  "keywords": [
+    "refugee",
+    "trauma",
+    "toolkit",
+    "clinicians",
+    "data",
+    "physician"
+  ],
+  "author": "Lucy Qin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucyq/hprt-toolkit/issues"
+  },
+  "homepage": "https://github.com/lucyq/hprt-toolkit"
+}
