@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 
+var user_bool;
 
 // INDEX 
 router.get('/', function (req, res) {
@@ -14,7 +15,10 @@ router.get('/', function (req, res) {
 
 // MANAGING USER ACCOUNTS
 router.get('/login', function(req, res) {
-	res.render('login');
+	res.render('login', {
+		isAuthenticated: false, 
+		user: req.user		
+	});
 });
 
 
@@ -27,16 +31,50 @@ router.post('/login', function(req,res) {
 
 // RENDER STATIC ACCOUNTS
 router.get('/quick_guide', function(req, res){
-	res.render('quick_guide');
+	res.render('quick_guide', {
+		isAuthenticated: false, 
+		user: req.user		
+	});
+
 });
 
 router.get('/home', function(req, res){
-	res.render('home');
+	res.render('home', {
+		isAuthenticated: true, 
+		user: req.user
+	});
 });
 
 router.get('/manual', function(req, res) {
-	res.render('manual');
+	res.render('manual', {
+		isAuthenticated: true, 
+		user: req.user
+	});
 });
+
+// Patient Information Pages
+router.get('/add_patient_info', function(req, res) {
+	res.render('add_patient_info', {
+		isAuthenticated: true, 
+		user: req.user
+	});
+});
+
+router.get('/view_patient_info', function(req, res) {
+	res.render('view_patient_info', {
+		isAuthenticated: true, 
+		user: req.user
+	});
+});
+
+
+router.get('/patients/new', function(req, res) {
+	res.render('patients/new', {
+		isAuthenticated: true, 
+		user: req.user
+	});
+});
+
 
 
 

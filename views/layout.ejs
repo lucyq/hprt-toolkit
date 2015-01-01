@@ -3,10 +3,15 @@
 <head>
 <title>HPRT Toolkit</title>
 
+
+
 <!--FIXED STYLE SHEETS-->
 <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/application.css">
+
+<link rel="SHORTCUT ICON" href="images/favicon.jpg" type="image/x-icon" />
+<link rel="ICON" href="images/favicon.jpg" type="image/ico" />
 
 <!--SCRIPTS-->
 <script src="jquery/dist/jquery.js"></script>
@@ -14,7 +19,67 @@
 
 </head>
 
-<%- body%>
+<body>	
+	<!--NAVIGATION BAR-->
+	<nav class="navbar navbar-default" role="navigation">
+ 		<div class="container-fluid">
+    	<!-- Brand and toggle get grouped for better mobile display -->
+    	<div class="navbar-header">
+      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		       	<span class="sr-only">Toggle navigation</span>
+		       	<span class="icon-bar"></span>
+		       	<span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+		        
+     <!--  	<a class="navbar-brand" href="#">HPRT Clinician's Toolkit</a> -->
+        
+        <a class="navbar-brand" href="home">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        </a>
+
+	        
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  
+	      <form class="navbar-form navbar-left" role="search">
+	      
+	      </form>
+
+
+	     <ul class="nav navbar-nav navbar-right">
+			<% if (!isAuthenticated) { %>
+				<a href='/login' class="nav_link">Log in</a>
+
+			<% } else { %>
+				<a href="/logout" class="nav_link">Log out</a>
+
+				<!-- redirect to home-->
+
+			<% } %>
+    <!--   if user_signed_in? 
+        <li>
+          link_to "Log Out", destroy_user_session_path, method: :delete %>
+        </li>
+
+      else
+        <li>
+            link_to "Sign In", new_user_session_path %>
+            </li>
+      end %>
+ -->
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+	<h1 class="title"><span style="color: rgb(80,80,80);">Harvard Program</span> in Refugee Trauma <span style="color: rgb(80,80,80);">|</span> <span class="title_highlight">Toolkit</span></h1>
+
+
+	<%- body%>
+</body>
 
 
 <!--FIXED FOOTER-->
