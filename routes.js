@@ -14,18 +14,9 @@ router.get('/', function (req, res) {
 });
 
 // MANAGING USER ACCOUNTS
-router.get('/login', function(req, res) {
-	res.render('login', {
-		isAuthenticated: false, 
-		user: req.user		
-	});
-});
 
 
 
-router.post('/login', function(req,res) {
-
-});
 
 
 
@@ -35,7 +26,6 @@ router.get('/quick_guide', function(req, res){
 		isAuthenticated: false, 
 		user: req.user		
 	});
-
 });
 
 router.get('/home', function(req, res){

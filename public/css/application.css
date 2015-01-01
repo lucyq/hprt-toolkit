@@ -29,10 +29,14 @@ a {
 }
 
 
-
 /* LAYOUT */
+body {
+  background-image: url('../images/cream_pixels.png');
+}
+
 nav {
   margin: 0px;
+  vertical-align: middle;
 }
 
 .nav_link {
@@ -42,7 +46,7 @@ nav {
 }
 
 .content {
-  background-color: rgba(240,240,240, 0.7);
+  background-color: rgba(240,240,240, 0.5);
   margin-right: 10%;
   margin-left: 10%;
   padding-right: 3%;
@@ -54,6 +58,10 @@ nav {
 
 
 /* FOOTER */
+.footer_links {
+  text-align: center;
+  font-size: 16px;
+}
 
  #wrap {
     padding-top: 600px;
@@ -68,6 +76,7 @@ nav {
 #push,
 #footer {
   height: 150px;
+  font-size: 14px;
 }
 #footer {
   background-color: #f5f5f5;
@@ -77,11 +86,10 @@ nav {
   #footer {
     margin-left: -20px;
     margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;    
+    padding: 20px; 
   }
 }
 
 .footer-text {
-	font-size: 10px;
+	font-size: 12px;
 }

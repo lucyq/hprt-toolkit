@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<% if (!isAuthenticated) { %>
 	<form action="" method="post">
 		<p>username:</p>
 		<input type="text" name="username" placeholder="Username">
@@ -17,6 +18,11 @@
 		<input type="password" name="password" placeholder="Password"><br><br>
 		<input type="submit" value="Log in">
 	</form>
+<% } else { %>
+	<h1 class="subtitle">Hello, <% user.name %>! You're already logged in!</h1>
+
+
+<% } %>
 </body>
 
 </html>

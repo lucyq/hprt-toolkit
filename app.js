@@ -4,38 +4,87 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var engine = require('ejs-locals');
-
+var passport = require('passport');
+var passportLocal = require('passport-local');
+var cookieParser = require('cookie-parser');
+var expressSession = require('express-session'); // creates in memory store
 
 var app = express();
-// configure app
+
 app.engine('ejs', engine);
- app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
+
+
+// CONFIG
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());﻿
+app.use(cookieParser());
+app.use(expressSession({ secret: process.env.SESSION_SECRET || "butterflies",
+						 resave: false, saveUninitialized: false})); // butterflies can be anything
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new passportLocal.Strategy(function(username, password, done) {
+	// Pretend this is using a real database
+	if (username == password) {
+		done(null, {id: username, name: username}); // user object with other info		
+	} else {
+		done(null,null); // no error but didn't authenticate correctly, validation failed
+	}
+}));
+
+passport.serializeUser(function(user, done){
+	// would query database usually
+	done(null, user.id); // first arg is error
+}); // passport invokes functio nfor us
+
+passport.deserializeUser(function(id, done) {
+	// query databse here
+	done(null, {id: id, name: id});
+});
+
+
+// RESOURCES
 //app.set('views', path.join(__dirname, 'views')) // __dirname : folder that contains this file
-
-
-
 // serve contents of this path
 app.use(express.static(path.join(__dirname, 'bower_components'))); 
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// middleware to parse body
-// app.use(bodyParser);
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());﻿
 
-
-// /* ERROR HANDLING */
-// app.use(function(err, req, res, next){
-// 	res.status(err.status || 500);
-// 	res.render('error', {
-// 		message: err.message,
-// 		error:err
-// 	});
-// });
 
 // all the routes added to todos are now added here
+app.use(require('./errors'));
 app.use(require('./routes'));
+
+
+app.post('/login', passport.authenticate('local'), function(req,res) {
+	res.redirect('home');
+});
+
+app.get('/login', function(req, res) {
+	res.render('login', {
+		isAuthenticated: req.isAuthenticated(), 
+		user: req.user		
+	});
+});
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+
+
+});
+
+
+
+app.get('/home', function(req, res){
+	res.render('home', {
+		isAuthenticated: req.isAuthenticated(), 
+		user: req.user
+	});
+});
+
 
 
 // define routes 
