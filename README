@@ -1,0 +1,10 @@
+-- This app is currently under construction and scheduled to fully deploy in March 2014 --
+
+
+HPRT Toolkit
+The toolkit aims to assist clinicians in refugee camps and clinics to collect and view patient information. It is a web app built using Ruby 2.1.3 and rails. The app is hosted by heroku and can be found here: http://www.hprt-toolkit.herokuapp.com
+
+The app features a quick guide to interacting with patients that has been modified from the Harvard Program in Refugee Trauma’s quick list. Instead of just listing the 11 points, it will also allow for physicians to record information about their patient. This web app will also feature a quick checklist of symptoms that physicians can use to record relevant information from a patient’s trauma story. Other physicians will also be able to access previously recorded trauma stories so that they have a better background on the patient when interacting with them. Access to this app is restricted to pre-approved clinicians and will necessitate an assigned username and password.
+
+
+
