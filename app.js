@@ -1,4 +1,6 @@
 // npm init --> package.json
+var fs = require('fs');
+var https = require('https');
 
 var express = require('express');
 var path = require('path');
@@ -6,13 +8,22 @@ var bodyParser = require('body-parser');
 var engine = require('ejs-locals');
 var passport = require('passport');
 var passportLocal = require('passport-local');
+var passportHttp = require('passport-http');
 var cookieParser = require('cookie-parser');
 var expressSession = require('express-session'); // creates in memory store
 
 var app = express();
 
+var server = https.createServer({
+	cert: fs.readFileSync(__dirname + '/my.cert'),
+	key: fs.readFileSync(__dirname + '/my.key')
+}, app);
+
+
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
+
+
 
 
 // CONFIG
@@ -24,14 +35,34 @@ app.use(expressSession({ secret: process.env.SESSION_SECRET || "butterflies",
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new passportLocal.Strategy(function(username, password, done) {
+function verifyCredentials(username, password, done) {
 	// Pretend this is using a real database
 	if (username == password) {
 		done(null, {id: username, name: username}); // user object with other info		
 	} else {
 		done(null,null); // no error but didn't authenticate correctly, validation failed
 	}
-}));
+}
+
+passport.use(new passportLocal.Strategy(verifyCredentials));
+passport.use(new passportHttp.BasicStrategy(verifyCredentials));
+// passport.use(new passportLocal.Strategy(function(username, password, done) {
+// 	// Pretend this is using a real database
+// 	if (username == password) {
+// 		done(null, {id: username, name: username}); // user object with other info		
+// 	} else {
+// 		done(null,null); // no error but didn't authenticate correctly, validation failed
+// 	}
+// }));
+
+// passport.use(new passportHttp.BasicStrategy(function(username, password, done){
+// 	// Pretend this is using a real database
+// 	if (username == password) {
+// 		done(null, {id: username, name: username}); // user object with other info		
+// 	} else {
+// 		done(null,null); // no error but didn't authenticate correctly, validation failed
+// 	}
+// })); // also another mode
 
 passport.serializeUser(function(user, done){
 	// would query database usually
@@ -51,12 +82,32 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+function ensureAuthorized(req, res, next) {
+	if(req.isAuthenticated()) {
+		next();
+	} else {
+		res.sendStatus(403);
+		//res.redirect('/login'); // not logged in, can't get api/data!
+	}
+}
+
+app.use('/api', passport.authenticate('basic', { session: false})); // reauthenticate
+
+
+// Passport Config
+app.get('/api/data', ensureAuthorized, function(req, res) {
+	res.json([
+		{value: 'foo'},
+		{value: 'bar'},
+		{value: 'baz'}]);
+});
+
 
 
 // all the routes added to todos are now added here
-app.use(require('./errors'));
-app.use(require('./routes'));
 
+app.use(require('./routes'));
+app.use(require('./errors'));
 
 app.post('/login', passport.authenticate('local'), function(req,res) {
 	res.redirect('home');
@@ -72,8 +123,6 @@ app.get('/login', function(req, res) {
 app.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
-
-
 });
 
 
@@ -100,6 +149,6 @@ app.get('/', function (req, res) {
 var port = process.env.PORT || 5000;
 
 
-app.listen(port, function () {
-	console.log('listening in on port ' + port);
+server.listen(port, function () {
+	console.log('listening in on https://localhost:' + port);
 });
