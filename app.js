@@ -1,6 +1,6 @@
 // npm init --> package.json
-var fs = require('fs');
-var https = require('https');
+// var fs = require('fs');
+// var https = require('https');
 
 var express = require('express');
 var path = require('path');
@@ -14,10 +14,11 @@ var expressSession = require('express-session'); // creates in memory store
 
 var app = express();
 
-var server = https.createServer({
-	cert: fs.readFileSync(__dirname + '/my.cert'),
-	key: fs.readFileSync(__dirname + '/my.key')
-}, app);
+// SECURE
+// var server = https.createServer({
+// 	cert: fs.readFileSync(__dirname + '/my.cert'),
+// 	key: fs.readFileSync(__dirname + '/my.key')
+// }, app);
 
 
 app.engine('ejs', engine);
@@ -148,7 +149,10 @@ app.get('/', function (req, res) {
 
 var port = process.env.PORT || 5000;
 
-
-server.listen(port, function () {
-	console.log('listening in on https://localhost:' + port);
+app.listen(port, function() {
+	console.log("Listening in port " + port);
 });
+// SECURE
+// server.listen(port, function () {
+// 	console.log('listening in on https://localhost:' + port);
+// });
