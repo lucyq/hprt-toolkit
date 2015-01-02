@@ -33,10 +33,11 @@
 		    </button>
 		        
      <!--  	<a class="navbar-brand" href="#">HPRT Clinician's Toolkit</a> -->
-        
-        <a class="navbar-brand" href="home">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-        </a>
+        <% if (isAuthenticated) { %> 
+	        <a class="navbar-brand" href="home">
+	        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+	        </a>
+        <% }  %>
 
 
 	        
