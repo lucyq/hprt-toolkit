@@ -32,7 +32,6 @@
 		        <span class="icon-bar"></span>
 		    </button>
 		        
-     <!--  	<a class="navbar-brand" href="#">HPRT Clinician's Toolkit</a> -->
         <% if (isAuthenticated) { %> 
 	        <a class="navbar-brand" href="home">
 	        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
@@ -53,25 +52,39 @@
 
 	     <ul class="nav navbar-nav navbar-right">
 			<% if (!isAuthenticated) { %>
-				<a href='/login' class="nav_link">Log in</a>
+
+					<span class="account_link"><li class="nav_link active" id="login_toggle"><a href="#" data-toggle="modal" data-target="#login_modal">Log In</a></li></span>
 
 			<% } else { %>
 				<a href="/logout" class="nav_link">Log out</a>
 
-				<!-- redirect to home-->
-
 			<% } %>
-    <!--   if user_signed_in? 
-        <li>
-          link_to "Log Out", destroy_user_session_path, method: :delete %>
-        </li>
 
-      else
-        <li>
-            link_to "Sign In", new_user_session_path %>
-            </li>
-      end %>
- -->
+			<div id="login_modal" class="modal fade">
+		    	<div class="modal-dialog">
+		        	<div class="modal-content">
+		          		<div class="modal-header">
+		            		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		            		<h4 class="modal-title">Log In</h4>
+		        		</div>
+		         		<div class="modal-body">
+		         			<form method="post" action="/login">
+		         			<label>Username</label><br>
+		         			<input class="textbox" type="text" name="username"><br><br>
+		         			
+		         			<label>Password</label><br>
+		         			<input class="textbox" type="password" name="password"><br><br>
+		         			<input class="btn btn-default textbox" type="submit" value="Log In"/><br><br>
+		         			</form>
+		  		        </div>
+		        	</div>
+		    	</div>
+			</div>
+
+
+
+
+
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -80,7 +93,21 @@
 	<h1 class="title"><span style="color: rgb(80,80,80);">Harvard Program</span> in Refugee Trauma <span style="color: rgb(80,80,80);">|</span> <span class="title_highlight">Toolkit</span></h1>
 
 
+
 	<%- body%>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".toggle-modal #login_toggle").click(function(){
+			$("#login_modal").modal('toggle');
+		});
+	});
+</script>
+
+
+
+
+
 </body>
 
 

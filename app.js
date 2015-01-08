@@ -182,7 +182,7 @@ app.get('/create_user', function(req, res) {
 
 app.post('/create_user', function(req, res, next){
 	mongo.Db.connect(mongoUri, function (err,db){
-		db.collection('users', function(err, col) {
+		db.collection('HPRT_users', function(err, col) {
 			var username = req.body.username;
 			var password = req.body.password;
 			var first_name = req.body.first_name;
@@ -205,15 +205,15 @@ app.post('/create_user', function(req, res, next){
      				if (items.length != 0) {
      					res.send("Username has been taken!");
      				} else {
-     					sendgrid.send({
-     						to: email,
-     						from: "lucyzqin@gmail.com",
-     						subject: "Welcome to HPRT Toolkit!",
-     						text: "Hello " + first_name + " " + last_name + ", welcome to HPRT Toolkit!"	
-     					}, function(err, json) {
-     						if (err) { return console.error(err); }
-     						console.log(json);
-     					});
+     					// sendgrid.send({
+     					// 	to: email,
+     					// 	from: "lucyzqin@gmail.com",
+     					// 	subject: "Welcome to HPRT Toolkit!",
+     					// 	text: "Hello " + first_name + " " + last_name + ", welcome to HPRT Toolkit!"	
+     					// }, function(err, json) {
+     					// 	if (err) { return console.error(err); }
+     					// 	console.log(json);
+     					// });
      					col.insert({'username':username,
      								'password':crypto.createHash('md5').update(password).digest("hex"),
      								'first_name':first_name,
@@ -222,13 +222,12 @@ app.post('/create_user', function(req, res, next){
      								'phone_num':phone_num,
      								'patients':patients,
      								'created_at':time
-
-
 			     					}, {safe: true}, function(err, res) {
 			     						col.find({'username':username}).toArray(function(err, items) {
 			     							// TODO
 			     						});
      					});
+     					res.redirect('/home');
      				}
      			});
      		}
@@ -339,6 +338,9 @@ app.post('/new_patient', function(req, res, next) {
 			var curr_age = req.body.curr_age;
 			var gender = req.body.gender;
 			var created_at = new Date();
+			// var htq_records[];
+			// var hsq_records[];
+			var empty_array = {};
 
 			// TODO: CHECK FOR NULL
 			if (first_name == null || last_name == null || location == null || dob == null ||
@@ -352,10 +354,8 @@ app.post('/new_patient', function(req, res, next) {
 				// 	if (items.length != 0) {
 				// 		res.send("You've already submitted a hypothesis!");
 				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
-							'dob':dob, 'gender':gender, 'created_at':created_at}, function(err, items) {
-					//res.send(JSON.stringify(items[0]));
+							'dob':dob, 'gender':gender, 'created_at':created_at, 'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
 					res.redirect('/questionnaires')
-					//res.send("Successfully added a new patient!");
 				});		
 			}
 
