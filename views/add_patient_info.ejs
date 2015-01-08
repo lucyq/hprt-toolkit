@@ -1,21 +1,44 @@
 <% layout('layout') -%>
 
-	<h2 class="subtitle">Add Patient Information</h2>
+<h2 class="subtitle">Add Patient Information</h2>
 
-	<div class="content">
-		<div class> 
-		<a href="/patients/new"
-		<button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
-			New Patient
-		</button>
-		</a>
+<div class="content">
 
-		<a href="/patients/find"
-		<button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
-			Existing Patient
-		</button>
-		</a>
-		</div>
+	<h2>
+		<span class="toggle_forms" divId="new_patient">New Patient</span>
+		<span class="toggle_forms" divId="existing_patient">Existing Patient</span>
+	</h2>
+
+
+	<div class="forms content_forms" id="new_patient">
+		<h2 style="text-align: left">Add a New Patient</h2>
+	
+		<form method="post" action="/new_patient">
+			First Name:<br> <input class="textbox_forms" type="text" name="first_name"/><br><br>
+			Last Name:<br> <input class="textbox_forms" type="text" name="last_name"/><br><br>
+
+			Location:<br> <input class="textbox_forms" type="text" name="location"/><br><br>
+			Date of Birth:<br> <input class="textbox_forms" type="text" name="date_of_birth"/><br><br>
+			Current Age:<br> <input class="textbox_forms" type="text" name="curr_age"/><br><br>
+			Gender:<br> <input class="textbox_forms" type="text" name="gender"/><br><br>
+	
+			<input type="submit" value="Submit"/><br><br>
+		</form>
+	</div>
+
+	<div class="forms content_forms" id="existing_patient">
+		<h2 style="text-align: left">Find Existing Patient</h2>	
+		<form method="get" action="/find_patient">
+			First Name:<br> <input class="textbox_forms" type="text" name="first_name"/><br><br>
+			Last Name:<br> <input class="textbox_forms" type="text" name="last_name"/><br><br>
+			Date of Birth:<br> <input class="textbox_forms" type="text" name="date_of_birth"/><br><br>
+			<input type="submit" value="Find"/><br><br>
+		</form>
+	</div>
+
+
+
+
 	<!--Not using atm 
 	<a href="ht_questionnaire"
 	<button type="button" class="btn btn-default btn-lg" aria-label="Left Align">
@@ -31,6 +54,18 @@
 	-->
 	</div>
 
+
+
+
+
+<script> 
+    $(".toggle_forms").bind("click", function() {
+         $(".content_forms").hide();
+         var divId = $(this).attr("divId");
+        $("#" + divId).slideToggle('slow', function() {});
+      //  $("#" + divId).show();
+      });
+</script>	
 
 
 

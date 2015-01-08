@@ -226,7 +226,7 @@ app.post('/create_user', function(req, res, next){
 
 			     					}, {safe: true}, function(err, res) {
 			     						col.find({'username':username}).toArray(function(err, items) {
-			     							res.send(JSON.stringify(items[0]));
+			     							// TODO
 			     						});
      					});
      				}
@@ -258,6 +258,12 @@ app.get('/home', function(req, res){
 	});
 });
 
+app.get('/questionnaires', function(req,res){
+	res.render('questionnaires', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+});
 
 
 // define routes 
@@ -314,6 +320,132 @@ app.get('/view_patient_info', function(req, res) {
 		user: req.user
 	});
 });
+
+// ADDING DATA
+app.post('/new_patient', function(req, res, next) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		if (err) {
+			res.send("Error connecting to database!");
+		}
+		db.collection('HPRT_patients', function(err, col) {
+			if (err) {
+				res.send("Database error!");
+			}
+
+			var first_name = req.body.first_name;
+			var last_name = req.body.last_name;
+			var location = req.body.location;
+			var dob = req.body.date_of_birth;
+			var curr_age = req.body.curr_age;
+			var gender = req.body.gender;
+			var created_at = new Date();
+
+			// TODO: CHECK FOR NULL
+			if (first_name == null || last_name == null || location == null || dob == null ||
+				curr_age == null || gender == null || 
+				first_name == " " || last_name == " " || location == " " || dob == " " ||
+				curr_age == " " || gender == " ") {
+				res.send("Missing fields!");
+			} else {
+				// TODO: check that patient doesn't already exist
+				// col.find({'student':student}).toArray(function(err, items){
+				// 	if (items.length != 0) {
+				// 		res.send("You've already submitted a hypothesis!");
+				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
+							'dob':dob, 'gender':gender, 'created_at':created_at}, function(err, items) {
+					//res.send(JSON.stringify(items[0]));
+					res.redirect('/questionnaires')
+					//res.send("Successfully added a new patient!");
+				});		
+			}
+
+		});
+	});
+
+});
+
+
+// DATA RETRIEVAL
+app.get("/find_patient", function(req, res, next) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		db.collection('HPRT_patients', function(err, col) {
+			var first_name = req.query.first_name;
+			var last_name = req.query.last_name;
+			var dob = req.query.date_of_birth;
+
+			if (first_name == null || last_name == null || dob == null) {
+				res.send("Missing fields!");
+			} else {
+				col.find({'first_name':first_name, 'last_name':last_name, 'dob':dob}).toArray(function(err, items) {
+					if (items.length == 0) {
+						res.send("Patient doesn't exist!");
+					} else {
+						res.send(JSON.stringify(items[0]));
+					}
+				});
+			}
+		});
+	});
+});
+
+/*
+
+app.get("/find_user_byName", function(request, response, next){
+  mongo.Db.connect(mongoUri, function (err, db) {
+    db.collection('users', function(er, collection) {
+        var username = request.query.username;
+
+        if (username == null || username == ""){
+          response.send("Missing fields");
+        } else {
+          collection.find({'username':username}).toArray(function(err, items) {
+            if (items.length == 0){
+              response.send("No such user");
+            } else {
+              response.send(JSON.stringify(items[0]));
+            }
+          }); 
+        }
+      });
+    });
+});
+*/
+
+
+/* 
+
+
+app.post("/submit_hypothesis", function(req, res, next) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		if (err) {
+			res.send("Error connecting to database!");
+		}
+		db.collection('TIU_submissions', function(err, col) {
+			if (err) {
+				res.send("Database Error!");
+			}
+			var student = req.body.student_name;
+			var hypothesis = req.body.hypothesis;
+			var time = new Date();
+
+			if (student == null || hypothesis == null ||
+				student == "" || hypothesis == "") {
+				res.send("Missing Fields!");
+			} else {
+				col.find({'student':student}).toArray(function(err, items){
+					if (items.length != 0) {
+						res.send("You've already submitted a hypothesis!");
+					} else {
+						col.insert({'student':student, 'hypothesis':hypothesis, 'created_at':time}, function(err, items) {
+							res.redirect('hypothesis');
+						});		
+					}
+				});
+			}
+		});
+	});
+});
+*/
 
 
 

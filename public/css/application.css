@@ -25,9 +25,7 @@
 a {
   font-family: 'Roboto';
   color: #000000;
-
 }
-
 
 /* LAYOUT */
 body {
@@ -49,13 +47,28 @@ nav {
   background-color: rgba(240,240,240, 0.5);
   margin-right: 10%;
   margin-left: 10%;
-  padding-right: 3%;
-  padding-left: 3%;
-  padding-top: 1%;
-  padding-bottom: 1%;
+  padding-right: 10%;
+  padding-left: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   font-family: 'Roboto';
 }
 
+/* FORMS */
+.content_forms {
+   display: none;
+
+}
+
+
+.toggle_forms {
+  background-color: rgba(100,100,100,0.3);
+
+}
+
+.toggle_forms:hover {
+  background-color: rgba(250,230,178,0.5);
+}
 
 /* FOOTER */
 .footer_links {
