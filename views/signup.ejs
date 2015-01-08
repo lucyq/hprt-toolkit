@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up</title>
+<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="css/style.css"
+<script src="jquery/dist/jquery.js"></script>
+<script src="bootstrap/dist/js/bootstrap.js"></script>
+
+</head>
+
+<body>
+<% if (!isAuthenticated) { %>
+	<form action="" method="post">
+		<p>Username:</p>
+		<input type="text" name="username" placeholder="Username">
+		<p>Password:</p>
+		<input type="password" name="password" placeholder="Password">
+		<p>Please enter your password again:</p>
+		<input type="password" name="verification_password" placeholder="Password">
+		<p>First Name:</p>
+		<input type="text" name="first_name" placeholder="">
+		<p>Last Name:</p>
+		<input type="text" name="last_name" placeholder="">
+		<p>Email Name:</p>
+		<input type="text" name="username" placeholder="yourname@example.com">
+		<p>Phone Number:</p>
+		<input type="text" name="username" placeholder="1234567890">
+
+		<br><br>
+		<input type="submit" value="Log in">
+	</form>
+<% } else { %>
+	<h1 class="subtitle">Hello, <% user.name %>! You already have an account!</h1>
+
+
+<% } %>
+</body>
+
+</html>

@@ -1,3 +1,5 @@
+// TODO: look up account locking
+
 // APP.JS --- establishes backend
 // LUCY QIN
 
@@ -45,6 +47,14 @@ app.use(cookieParser());
 app.use(expressSession({ secret: process.env.SESSION_SECRET || "butterflies",
 						 resave: false, saveUninitialized: false})); // butterflies can be anything
 
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+
 // DATABASE SETUP
 var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
@@ -76,7 +86,7 @@ function verifyCredentials(username, password, done) {
 						done(null,null);
 					} else {
 						if (items[0].password == crypto.createHash('md5').update(password).digest("hex")) {
-							done(null, JSON.stringify(items[0]));
+							done(null, {id: username, name: username});
 						} else {
 							done(null,null);
 						}
@@ -95,14 +105,7 @@ function verifyCredentials(username, password, done) {
 
 passport.use(new passportLocal.Strategy(verifyCredentials));
 passport.use(new passportHttp.BasicStrategy(verifyCredentials));
-// passport.use(new passportLocal.Strategy(function(username, password, done) {
-// 	// Pretend this is using a real database
-// 	if (username == password) {
-// 		done(null, {id: username, name: username}); // user object with other info		
-// 	} else {
-// 		done(null,null); // no error but didn't authenticate correctly, validation failed
-// 	}
-// }));
+
 
 // passport.use(new passportHttp.BasicStrategy(function(username, password, done){
 // 	// Pretend this is using a real database
