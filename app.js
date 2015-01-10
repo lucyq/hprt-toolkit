@@ -63,10 +63,10 @@ var mongoUri = process.env.MONGOLAB_URI ||
 var ObjectId = require('mongodb').ObjectID;
 
 app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+  	res.header('Access-Control-Allow-Origin', '*');
+  	res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  	res.header('Access-Control-Allow-Headers', 'Content-Type');
+	next();
 });
 
 
@@ -161,14 +161,9 @@ app.get('/api/data', ensureAuthorized, function(req, res) {
 
 
 
-// all the routes added to todos are now added here
 
-// app.use(require('./routes'));
-// app.use(require('./errors'));
 
-//
-//   A C C O U N T   M A N A G E M E N T
-//
+// ACCOUNT MANAGEMENT
 app.post('/login', passport.authenticate('local'), function(req,res) {
 	res.redirect('home');
 });
@@ -178,11 +173,74 @@ app.get('/create_user', function(req, res) {
 		isAuthenticated: req.isAuthenticated(), 
 		user: req.user
 	});
-})
+});
+
+
+// // TODO: CREATE ADMINS. ADMINS CREATE NEW USERS.
+// app.post('/create_admin', function(req, res, next){
+// 	mongo.Db.connect(mongoUri, function (err,db){
+// 		db.collection('HPRT_accounts', function(err, col) {
+// 			var username = req.body.username;
+// 			// TODO: generate random password -> send it through sendgrid.
+// 			//var password = req.body.password;
+// 			var first_name = req.body.first_name;
+// 			var last_name = req.body.last_name;
+// 			//var ver_password = req.body.verification_password;
+// 			var email = req.body.email;
+// 			//var phone_num = req.body.phone_num;
+// 			var patients = [];
+// 			var time = new Date();
+
+// 			// Account has been activated.
+
+//      		// if (username == null || password == null || ver_password == null || email == null || 
+//      		// 	first_name == null || last_name == null || phone_num == null) {
+//      		// 	res.send('Missing fields!');
+//      		// } else if (password != ver_password){
+//      		if (password != ver_password) {
+//      			res.send("Passwords don't match!");
+//      		} else {
+//      			col.find({'username':username}).toArray(function(err, items) {
+//      				if (items.length != 0) {
+//      					res.send("Username has been taken!");
+//      				} else {
+//      					// sendgrid.send({
+//      					// 	to: email,
+//      					// 	from: "lucyzqin@gmail.com",
+//      					// 	subject: "Welcome to HPRT Toolkit!",
+//      					// 	text: "Hello " + first_name + " " + last_name + ", welcome to HPRT Toolkit!"	
+//      					// }, function(err, json) {
+//      					// 	if (err) { return console.error(err); }
+//      					// 	console.log(json);
+//      					// });
+//      					col.insert({'username':username,
+//      								'password':crypto.createHash('md5').update(password).digest("hex"),
+//      								'first_name':first_name,
+//      								'last_name':last_name,
+//      								'email':email,
+//      								'phone_num':phone_num,
+//      								'role':'user',
+//      								'patients':patients,
+//      								'created_at':time
+// 			     					}, {safe: true}, function(err, res) {
+// 			     						col.find({'username':username}).toArray(function(err, items) {
+// 			     							// TODO
+// 			     						});
+//      					});
+//      					res.redirect('/home');
+//      				}
+//      			});
+//      		}
+// 		});
+// 	});
+  
+// });
+
+
 
 app.post('/create_user', function(req, res, next){
 	mongo.Db.connect(mongoUri, function (err,db){
-		db.collection('HPRT_users', function(err, col) {
+		db.collection('HPRT_accounts', function(err, col) {
 			var username = req.body.username;
 			var password = req.body.password;
 			var first_name = req.body.first_name;
@@ -220,6 +278,7 @@ app.post('/create_user', function(req, res, next){
      								'last_name':last_name,
      								'email':email,
      								'phone_num':phone_num,
+     								'role':'user',
      								'patients':patients,
      								'created_at':time
 			     					}, {safe: true}, function(err, res) {
@@ -250,36 +309,19 @@ app.get('/logout', function(req, res) {
 
 
 
-app.get('/home', function(req, res){
-	res.render('home', {
-		isAuthenticated: req.isAuthenticated(), 
-		user: req.user
-	});
-});
 
-app.get('/questionnaires', function(req,res){
-	res.render('questionnaires', {
-		isAuthenticated: req.isAuthenticated(),
-		user: req.user
-	});
-});
-
-
-// define routes 
-
-// root
-
-/* WHEN USING STATIC PAGES
-app.get('/', function (req, res) {
-	res.render('views/html/index.html');
-});
-*/
-
-
-// RENDER STATIC PAGES
+// STATIC PAGES
 app.get('/', function (req, res) {
 	res.render('index', {
 		isAuthenticated: false, 
+		user: req.user
+	});
+});
+
+
+app.get('/home', function(req, res){
+	res.render('home', {
+		isAuthenticated: req.isAuthenticated(), 
 		user: req.user
 	});
 });
@@ -319,6 +361,14 @@ app.get('/view_patient_info', function(req, res) {
 		user: req.user
 	});
 });
+
+app.get('/questionnaires', function(req,res){
+	res.render('questionnaires', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+});
+
 
 // ADDING DATA
 app.post('/new_patient', function(req, res, next) {
