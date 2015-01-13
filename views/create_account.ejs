@@ -1,0 +1,27 @@
+<% layout('layout') -%>
+
+<div class="content">
+	<form action="/create_account" method="post">
+
+		<label>Username:</label><br>
+		<input type="text" name="username" placeholder=""><br>
+		<label>First Name:</label><br>
+		<input type="text" name="first_name" placeholder=""><br>
+		<label>Last Name:</label><br>
+		<input type="text" name="last_name" placeholder=""><br>
+ 		<label>Email:</label><br>
+		<input type="text" name="email" placeholder=""><br>
+ 		<label>Password:</label><br>
+		<input type="password" name="password" placeholder="Password"><br>
+		<label>Confirm Password:</label><br>
+		<input type="password" name="ver_password" placeholder="Password"><br>
+		<label>Verification Code:</label><br>
+		<input type="text" name="ver_code"><br>		
+		<label>Phone Number:</label><br>
+		<input type="text" name="phone_num" placeholder="1234567890"><br>
+
+		<br><br>
+		<input type="submit" value="Log in">
+	</form>
+</div>
+

@@ -175,125 +175,84 @@ app.get('/create_user', function(req, res) {
 	});
 });
 
-
-// // TODO: CREATE ADMINS. ADMINS CREATE NEW USERS.
-// app.post('/create_admin', function(req, res, next){
-// 	mongo.Db.connect(mongoUri, function (err,db){
-// 		db.collection('HPRT_accounts', function(err, col) {
-// 			var username = req.body.username;
-// 			// TODO: generate random password -> send it through sendgrid.
-// 			//var password = req.body.password;
-// 			var first_name = req.body.first_name;
-// 			var last_name = req.body.last_name;
-// 			//var ver_password = req.body.verification_password;
-// 			var email = req.body.email;
-// 			//var phone_num = req.body.phone_num;
-// 			var patients = [];
-// 			var time = new Date();
-
-// 			// Account has been activated.
-
-//      		// if (username == null || password == null || ver_password == null || email == null || 
-//      		// 	first_name == null || last_name == null || phone_num == null) {
-//      		// 	res.send('Missing fields!');
-//      		// } else if (password != ver_password){
-//      		if (password != ver_password) {
-//      			res.send("Passwords don't match!");
-//      		} else {
-//      			col.find({'username':username}).toArray(function(err, items) {
-//      				if (items.length != 0) {
-//      					res.send("Username has been taken!");
-//      				} else {
-//      					// sendgrid.send({
-//      					// 	to: email,
-//      					// 	from: "lucyzqin@gmail.com",
-//      					// 	subject: "Welcome to HPRT Toolkit!",
-//      					// 	text: "Hello " + first_name + " " + last_name + ", welcome to HPRT Toolkit!"	
-//      					// }, function(err, json) {
-//      					// 	if (err) { return console.error(err); }
-//      					// 	console.log(json);
-//      					// });
-//      					col.insert({'username':username,
-//      								'password':crypto.createHash('md5').update(password).digest("hex"),
-//      								'first_name':first_name,
-//      								'last_name':last_name,
-//      								'email':email,
-//      								'phone_num':phone_num,
-//      								'role':'user',
-//      								'patients':patients,
-//      								'created_at':time
-// 			     					}, {safe: true}, function(err, res) {
-// 			     						col.find({'username':username}).toArray(function(err, items) {
-// 			     							// TODO
-// 			     						});
-//      					});
-//      					res.redirect('/home');
-//      				}
-//      			});
-//      		}
-// 		});
-// 	});
-  
-// });
-
-
-
 app.post('/create_user', function(req, res, next){
-	mongo.Db.connect(mongoUri, function (err,db){
-		db.collection('HPRT_accounts', function(err, col) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		db.collection('HPRT_accounts', function(err, col){
 			var username = req.body.username;
-			var password = req.body.password;
-			var first_name = req.body.first_name;
-			var last_name = req.body.last_name;
-			var ver_password = req.body.verification_password;
 			var email = req.body.email;
-			var phone_num = req.body.phone_num;
+			var role = req.body.role_type;
+			var created_at = new Date();
 			var patients = [];
-			var time = new Date();
+			var ver_code = Math.floor((Math.random() * 100000) + 1);
 
-
-     		// if (username == null || password == null || ver_password == null || email == null || 
-     		// 	first_name == null || last_name == null || phone_num == null) {
-     		// 	res.send('Missing fields!');
-     		// } else if (password != ver_password){
-     		if (password != ver_password) {
-     			res.send("Passwords don't match!");
-     		} else {
-     			col.find({'username':username}).toArray(function(err, items) {
-     				if (items.length != 0) {
-     					res.send("Username has been taken!");
-     				} else {
-     					// sendgrid.send({
-     					// 	to: email,
-     					// 	from: "lucyzqin@gmail.com",
-     					// 	subject: "Welcome to HPRT Toolkit!",
-     					// 	text: "Hello " + first_name + " " + last_name + ", welcome to HPRT Toolkit!"	
-     					// }, function(err, json) {
-     					// 	if (err) { return console.error(err); }
-     					// 	console.log(json);
-     					// });
-     					col.insert({'username':username,
-     								'password':crypto.createHash('md5').update(password).digest("hex"),
-     								'first_name':first_name,
-     								'last_name':last_name,
-     								'email':email,
-     								'phone_num':phone_num,
-     								'role':'user',
-     								'patients':patients,
-     								'created_at':time
-			     					}, {safe: true}, function(err, res) {
-			     						col.find({'username':username}).toArray(function(err, items) {
-			     							// TODO
-			     						});
-     					});
-     					res.redirect('/home');
-     				}
-     			});
-     		}
+			if (username == null || email == null || role == null ||
+				username == " " || email == " " || role == " ") {
+				res.send('Missing Fields!');
+			} else {
+				col.find({'username': username}).toArray(function(err, items) {
+					if (items.length != 0) {
+						res.send("Username has been taken!");
+					} else {
+						// sendgrid.send({
+						// 	to: email,
+						// 	from: "hprt-toolkit@gmail.com",
+						// 	subject: "Welcome to HPRT Toolkit",
+						// 	text: "Hello! Here is your login information. Use the information below to finish creating your account! Username: " + username + "Verification code: " + ver_code + "hprt-toolkit.heroku.com/create_account";
+						// }, function(err, json) {
+						// 	if (err) {return console.error(err); }
+						// 	console.log(json);
+						// });
+						col.insert({'username':username,
+							'email':email,
+							'password': " ",
+     						'ver_code':crypto.createHash('md5').update(ver_code).digest("hex"),
+							'first_name': " ",
+							'last_name': " ",
+     						'phone_num': " ",
+     						'role':role,
+     						'patients':patients,
+     						'created_at':created_at
+    					});
+						res.redirect('/create_user');
+					}
+				});
+			}
 		});
 	});
-  
 });
+
+app.post('/create_account', function(req, res) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		db.collection('HPRT_accounts', function(err, col) {
+			var username = req.body.username;
+			var email = req.body.email;
+			var first_name = req.body.first_name;
+			var last_name = req.body.last_name;
+			var password = req.body.password;
+			var ver_password = req.body.ver_password;
+			var phone_num = req.body.phone_num;
+			var ver_code = req.body.ver_code;
+
+			if (username == null || email == null || first_name == null || last_name == null ||
+				password == null || ver_password == null || phone_num == null || 
+				username == " " || email == " " || first_name == " " || last_name == " " ||
+				password == " " || ver_password == " " || phone_num == " ") {
+				res.send("Missing fields!"); 
+			} else {
+				col.find({'username':username}).toArray(function(err, items) {
+					if (items.length == 0) {
+						res.send("user doesn't exist");
+					} else {
+						if (items[0].ver_code == ver_code) {
+							col.update({'username':username}, {$set: {password:password, email:email, first_name:first_name, last_name:last_name, phone_num:phone_num}});
+						}
+ 					}
+				});
+			}
+		});
+	});
+});
+	
 
 app.get('/login', function(req, res) {
 	res.render('login', {
@@ -302,8 +261,8 @@ app.get('/login', function(req, res) {
 	});
 });
 
-app.get('/update_password', function(req, res) {
-	res.render('update_password', {
+app.get('/create_account', function(req, res) {
+	res.render('create_account', {
 		isAuthenticated: req.isAuthenticated(), 
 		user: req.user		
 	});
