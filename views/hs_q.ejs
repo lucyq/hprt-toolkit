@@ -1,14 +1,63 @@
+<% layout('layout') -%>
+<div class="content">
+	<h2>Hopkins Symptom Checklist</h2>
 
-	<h3>Hopkins Symptom Checklist</h3>
+	<div id="hs_part_1">
+		<h3>Part I: Anxiety Symptoms</h3>
+	</div>
 
+	<div id="hs_part_2">
+		<h3>Part II: Depression Symptoms</h3>
+	</div>
 
-	<h4>Part I: Anxiety Symptoms</h4>
-
-
-	<h4>Part II: Depression Symptoms</h4>
-
-
-	<h4>Scoring</h4>
+	<h3>Scoring</h3>
 	Anxiety Score:
 	DSM-IV Depression Score:
 	Total Score:
+
+</div>
+
+<script>
+
+var part1_q = ['Suddenly scared for no reason',
+					 'Feeling fearful',
+					 'Faintness, dizziness, or weakness',
+					 'Nervousness or shakiness inside',
+					 'Heart pounding or racing',
+					 'Trembling',
+					 'Feeling tense or keyed up',
+					 'Headaches',
+					 'Spell of terror or panic',
+					 'Feeling restless or can\'t sit still'];
+
+console.log(part1_q);
+
+var part2_q = ['Feeling low in energy, slowed down',
+'Blaming yourself for things',
+'Crying easily',
+'Loss of sexual interest or pleasure',
+'Poor appetite',
+'Difficulty falling asleep, staying asleep',  
+'Feeling hopeless about future',
+'Feeling blue',
+'Feeling lonely',
+'Thought of ending your life',
+'Feeling of being trapped or caught',
+'Worry too much about things',
+'Feeling no interest in things',
+'Feeling everything is an effort',
+'Feeling of worthlessness'];
+
+	for (var i = 0; i < part1_q.length; i++) {
+		var num = i + 1;
+		$('#hs_part_1').append('<p>' + num + '.) ' + part1_q[i] + '</p><input type="radio" name="part1_radio_' + num + ' value="1">Not at all<br><input type="radio" name="part1_radio_' + num + 'value="2">A little<br><input type="radio" name="part1_radio' + num + 'value="3">Quite a bit<br><input type="radio" name="part1_radio' + num + 'value="4">Extremely<br><br>');
+	}
+
+	for (var i = 0; i < part2_q.length; i++) {
+		var num = i + 1;
+		$('#hs_part_2').append('<p>' + num + '.) ' + part2_q[i] + '</p><input type="radio" name="part2_radio_' + num + ' value="1">Not at all<br><input type="radio" name="part2_radio_' + num + 'value="2">A little<br><input type="radio" name="part2_radio' + num + 'value="3">Quite a bit<br><input type="radio" name="part2_radio' + num + 'value="4">Extremely<br><br>');
+	}
+
+
+
+</script>

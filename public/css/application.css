@@ -1,108 +1,11 @@
 /* TITLE & FONTS */
-@import url(http://fonts.googleapis.com/css?family=Roboto:300);
 
-.title {
-  text-align: center;
-  font-family: 'Georgia';
-  color: rgb(130,130,130);
-}
 
-.title_highlight {
-  color: rgb(191,61,61);
-}
 
-.subtitle {
-  text-align: center;
-  font-family: 'Roboto';
-  font-size: 25px;
-}
 
-.section_title, h4 {
-  text-align: center;
-  font-size: 20px;
-}
-
-a {
-  font-family: 'Roboto';
-  color: #000000;
-}
 
 /* LAYOUT */
-body {
-  background-image: url('../images/cream_pixels.png');
-}
 
-nav {
-  margin: 0px;
-  vertical-align: middle;
-}
 
-.nav_link {
-  vertical-align: center;
-  font-size: 25px;
-  text-align: center;
-}
-
-.content {
-  background-color: rgba(240,240,240, 0.5);
-  margin-right: 10%;
-  margin-left: 10%;
-  padding-right: 10%;
-  padding-left: 10%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  font-family: 'Roboto';
-}
 
 /* FORMS */
-.content_forms {
-   display: none;
-
-}
-
-
-.toggle_forms {
-  background-color: rgba(100,100,100,0.3);
-
-}
-
-.toggle_forms:hover {
-  background-color: rgba(250,230,178,0.5);
-}
-
-/* FOOTER */
-.footer_links {
-  text-align: center;
-  font-size: 16px;
-}
-
- #wrap {
-    padding-top: 600px;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -3%;
-  }
-
-
-#push,
-#footer {
-  height: 150px;
-  font-size: 14px;
-}
-#footer {
-  background-color: #f5f5f5;
-}
-
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding: 20px; 
-  }
-}
-
-.footer-text {
-	font-size: 12px;
-}

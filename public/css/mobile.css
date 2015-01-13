@@ -1,0 +1,23 @@
+
+.content {
+  background-color: rgba(240,240,240, 0.5);
+  margin-right: 3%;
+  margin-left: 3%;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  font-family: 'Roboto';
+}
+
+.home_nav {
+
+}
+
+.quick_guide_header {
+	background-color: rgba(60,60,60,0.3);
+	margin: 5px;
+	padding: 5px;
+	border: 2px solid;
+	border-radius:10px;
+} 

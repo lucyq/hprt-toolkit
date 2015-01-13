@@ -302,6 +302,15 @@ app.get('/login', function(req, res) {
 	});
 });
 
+app.get('/update_password', function(req, res) {
+	res.render('update_password', {
+		isAuthenticated: req.isAuthenticated(), 
+		user: req.user		
+	});
+});
+
+
+
 app.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
@@ -368,6 +377,21 @@ app.get('/questionnaires', function(req,res){
 		user: req.user
 	});
 });
+
+app.get('/ht_q', function(req,res){
+	res.render('ht_q', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+});
+
+app.get('/hs_q', function(req,res){
+	res.render('hs_q', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+});
+
 
 
 // ADDING DATA
