@@ -1,19 +1,22 @@
 <% layout('layout') -%>
 <div class="content">
 	<h2>Hopkins Symptom Checklist</h2>
+	<form method="/hs_q" action="post">
+		<div id="hs_part_1">
+				<h3>Part I: Anxiety Symptoms</h3>
+		</div>
 
-	<div id="hs_part_1">
-		<h3>Part I: Anxiety Symptoms</h3>
+		<div id="hs_part_2">
+			<h3>Part II: Depression Symptoms</h3>
+		</div>
+	</form>
+
+	<div id="scoring">
+		<h3>Scoring</h3>
+		Anxiety Score:
+		DSM-IV Depression Score:
+		Total Score:
 	</div>
-
-	<div id="hs_part_2">
-		<h3>Part II: Depression Symptoms</h3>
-	</div>
-
-	<h3>Scoring</h3>
-	Anxiety Score:
-	DSM-IV Depression Score:
-	Total Score:
 
 </div>
 
@@ -30,7 +33,7 @@ var part1_q = ['Suddenly scared for no reason',
 					 'Spell of terror or panic',
 					 'Feeling restless or can\'t sit still'];
 
-console.log(part1_q);
+
 
 var part2_q = ['Feeling low in energy, slowed down',
 'Blaming yourself for things',
@@ -50,7 +53,7 @@ var part2_q = ['Feeling low in energy, slowed down',
 
 	for (var i = 0; i < part1_q.length; i++) {
 		var num = i + 1;
-		$('#hs_part_1').append('<p>' + num + '.) ' + part1_q[i] + '</p><input type="radio" name="part1_radio_' + num + ' value="1">Not at all<br><input type="radio" name="part1_radio_' + num + 'value="2">A little<br><input type="radio" name="part1_radio' + num + 'value="3">Quite a bit<br><input type="radio" name="part1_radio' + num + 'value="4">Extremely<br><br>');
+		$('#hs_part_1').append('<p>' + num + '.) ' + part1_q[i] + '</p><input type="radio" name="part1_radio_' + num + ' value="00">Not at all<br><input type="radio" name="part1_radio_' + num + 'value="">A little<br><input type="radio" name="part1_radio' + num + 'value="3">Quite a bit<br><input type="radio" name="part1_radio' + num + 'value="4">Extremely<br><br>');
 	}
 
 	for (var i = 0; i < part2_q.length; i++) {

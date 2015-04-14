@@ -15,7 +15,6 @@
 <link rel="stylesheet" media="only screen and (min-width: 401px)" href="../css/application.css" />
 
 
-<!-- <link rel="stylesheet" href="css/application.css"> -->
 
 <link rel="SHORTCUT ICON" href="images/favicon.jpg" type="image/x-icon" />
 <link rel="ICON" href="images/favicon.jpg" type="image/ico" />
@@ -86,13 +85,16 @@
 	   
 	<h1 class="title"><span style="color: rgb(80,80,80);">Harvard Program</span> in Refugee Trauma <span style="color: rgb(80,80,80);">|</span> <span class="title_highlight">Toolkit</span></h1>
 
+    <% if (isAuthenticated) { %> 
+		<%- body%>
+	<% } else { %> 
+		
+		<br><br>
+		<div class="content">
+		<h2 style="text-align: center;">Please log in to view content</h2>
+		</div>
 
-	<%- body%>
-
-<br><br>
-<div class="content">
-	<h2 style="text-align: center;">Please log in to view content</h2>
-</div>
+	<% } %>
 
 <script type="text/javascript">
 	$(document).ready(function(){

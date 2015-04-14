@@ -1,0 +1,546 @@
+<% layout('layout') -%>
+
+
+<style>
+	.guide_item {
+		display: none;
+	}	
+</style>
+
+
+<div class="content">
+
+	<div class='guide_item' id='guide_1'>
+		<h3 class='guide_item_title'>1. ASK</h3>
+		<form id="form_1"> 
+			<input id="1_q1" name="1_q1" type="radio" value="1"/> Yes<br>
+			<input id="1_q1" name="1_q1" type="radio" value="0"/> No<br>
+		</form>
+
+		<div class="guide_checkboxes" id="1-check-items">
+			<div class="yes" id='1-yes-items'>
+				<input type="checkbox" value="0">It was very helpful<br>
+				<input type="checkbox" value="1">I need more information<br>
+				<input type="checkbox" value="2">They indicated that they had experienced torture<br> 
+				
+				<h5>The patient indicated that they had experienced torture or gender-based violence and I asked them if they had experienced any of the following (select all that apply):</h5>
+
+				
+
+			</div>
+			<div class="no">	
+				I did not ask my patient because (select all that apply): <br>
+				<input type="checkbox" value="0">I did not have time<br>
+				<input type="checkbox" value="1">I did not have enough trust with the patient<br>
+				<input type="checkbox" value="2">I had no idea what to do with the information I did not want to upset the patient<br>
+				<input type="checkbox" value="3">I felt the patient might lose control<br>
+				<input type="checkbox" value="4">I might get too upset to help the patient<br>
+			</div>
+
+		</div>
+
+
+
+		<button type="button" class="btn next_q" divId="guide_2">Next</button>
+
+	</div>
+	
+
+	<div class='guide_item' id='guide_2'>
+
+		<h3 class='guide_item_title'>2. IDENTIFY: Concrete physical or mental effects</h3>
+
+		<form id ="form_2">
+			<p>I identified the patient’s major physical symptoms:</p>
+			<input id="2_q1" name="2_q1" type="radio" value="1"/> Yes<br>
+			<input id="2_q1" name="2_q1" type="radio" value="0"/> No<br>
+
+			<p>I realized that these symptoms are a common expression of emotional distress (CED) within the patient’s culture:</p>
+			<input id="2_q2" name="2_q2" value="0" type="radio">Yes<br>
+			<input id="2_q2" name="2_q2" value="1" type="radio">No<br>
+			<input id="2_q2" name="2_q2" value="2" type="radio">I have no knowledge about CEDs in this culture<br><br>
+
+			<p>The patient was expressing symptoms of (select all that apply):</p>
+
+			<input id="2_q3" name="2_q3" value="0" type="checkbox"/>Grief<br>
+			<input id="2_q3" name="2_q3" value="1" type="checkbox"/>Anxiety<br>
+			<input id="2_q3" name="2_q3" value="2" type="checkbox"/>Depression<br>	
+			<input id="2_q3" name="2_q3" value="3" type="checkbox"/>Traumatic Head Injury<br>
+			<input id="2_q3" name="2_q3" value="4" type="checkbox"/>Chronic Insomnia<br>
+			<input id="2_q3" name="2_q3" value="5" type="checkbox"/>Posttraumatic Stress Disorder (PTSD)<br>
+			<input id="2_q3" name="2_q3" value="6" type="checkbox"/>None of the above<br>
+
+		</form>
+
+
+		<button type="button" class="btn prev_q" divId="guide_1">Back</button>
+
+		<button type="button" class="btn next_q" divId="guide_3">Next</button>
+
+	</div>
+
+<!-- 
+			<input id="2_q3" name="2_q3" value="5" type="checkbox"/> -->
+	
+
+
+		<div class='guide_item' id='guide_3'>
+			<h3 class='guide_item_title'>3. DIAGNOSE AND TREAT</h3>
+
+			<form id="form_3">
+
+				<p>The patient needs to be treated for chronic insomnia and nightmares:</p>
+				<input id="3_q" name="3_q1" value="1" type="radio">Yes<br>
+				<input id="3_q" name="3_q1" value="0" type="radio">No<br>
+
+
+
+				<p>The patient can profit from (select all that apply): </p><br>
+				<input id="3_q2" name="3_q2" value="0" type="checkbox"/> Psychiatric medication<br>
+				<input id="3_q2" name="3_q2" value="1" type="checkbox"/>Traditional Healing<br>
+				<input id="3_q2" name="3_q2" value="2" type="checkbox"/>Spiritual/religious healing<br>
+				<input id="3_q2" name="3_q2" value="3" type="checkbox"/>Counseling<br>
+				<input id="3_q2" name="3_q2" value="4" type="checkbox"/>None of the above are needed<br>
+
+
+				<p>On further evaluation and history, I believe the patient might have a traumatic head injury:</p> 
+
+				<input id="3_q3" name="3_q3" value="1" type="radio">Yes<br>
+				<input id="3_q3" name="3_q3" value="0" type="radio">No, this diagnosis is not relevant to the patient<br>
+
+				
+				<p>I have used the PHQ-9 or the Hopkins Symptom Checklist (HSCL) to determine if the patient suffers from depression (please see the HSCL App for assessing depression):</p>
+				<input id="3_q4" name="3_q4" value="1" type="radio">Yes<br>
+				<input id="3_q4" name="3_q4" value="0" type="radio">No<br>
+				<input id="3_q4" name="3_q4" value="2" type="radio">Not necessary<br>
+
+
+				<p>I have used the Harvard Trauma Questionnaire (HTQ) to assess for PTSD (please see the HTQ App for assessing PTSD):</p>
+				<input id="3_q5" name="3_q5" value="1" type="radio">Yes<br>
+				<input id="3_q5" name="3_q5" value="0" type="radio">No<br>
+				<input id="3_q5" name="3_q5" value="2" type="radio">Not necessary<br>
+			</form>
+
+
+		<button type="button" class="btn prev_q" divId="guide_2">Back</button>
+
+		<button type="button" class="btn next_q" divId="guide_4">Next</button>
+
+	</div>
+
+
+
+	<div class='guide_item' id='guide_4'>
+		<form id="form_4">
+			<h3 class='guide_item_title'>4. REFER screened cases of serious mental illness</h3>
+
+
+			<p>The patient has serious mental health problems including (select all that apply):</p>
+				<input id="4_q1" name="4_q1" value="0" type="checkbox"/>Danger to self or others<br>
+				<input id="4_q1" name="4_q1" value="1" type="checkbox"/>Complicated grief<br>
+				<input id="4_q1" name="4_q1" value="2" type="checkbox"/>Sever forms of PTSD and/or depression<br>
+				<input id="4_q1" name="4_q1" value="3" type="checkbox"/>Major social and/or physical disability<br>
+			<input id="4_q1" name="4_q1" value="4" type="checkbox"/>None of the above<br>
+
+			<p>[If any of the above are selected] I took the following action:</p>
+			<input id="4_q2" name="4_q2" value="0" type="radio">Referred the patient to a behavioral health specialist<br>
+			<input id="4_q2" name="4_q2" value="1" type="radio">Handled it myself because I have no-one to refer to<br>
+			<input id="4_q2" name="4_q2" value="2" type="radio">Handled it myself because the patient will improve on their own<br> 
+
+		</form>
+
+
+		<button type="button" class="btn prev_q" divId="guide_3">Back</button>
+
+		<button type="button" class="btn next_q" divId="guide_5">Next</button>
+	</div>
+	<br>
+
+
+	<div class='guide_item' id='guide_5'>
+
+		<h3 class='guide_item_title'>5. REINFORCE/TEACH positive coping behavior</h3>
+
+		<form id="form_5">
+
+			<p>I was able to build upon the patient’s self-healing response:</p> 
+			<input id="5_q1" name="5_q1" value="1" type="radio">Yes<br>
+			<input id="5_q1" name="5_q1" value="0" type="radio">No<br>
+			<br>
+
+			<p>I asked the patient the following self-healing coping questions (select all that apply):</p>
+			<input id="5_q2" name="5_q2" value="0" type="checkbox"> What traumatic events have happened?<br>
+			<input id="5_q2" name="5_q2" value="1" type="checkbox"> How are your body and mind repairing the injuries sustained from those events?<br>
+			<input id="5_q2" name="5_q2" value="2" type="checkbox"> What have you done in your daily life to help yourself recover?<br>
+			<input id="5_q2" name="5_q2" value="3" type="checkbox">  What justice do you require from society to support your personal healing?<br>
+
+		</form>
+
+
+
+		<button type="button" class="btn prev_q" divId="guide_4">Back</button>
+
+		<button type="button" class="btn next_q" divId="guide_6">Next</button>
+	</div>
+
+
+	<div class='guide_item' id='guide_6'>
+		<h3 class='guide_item_title'>6. REINFORCE/TEACH positive coping behavior</h3>
+		<p>I referred the patient directly to (select all that apply): </p>
+		<form id="form_6">
+
+		<input name="6_q1" id="6_q1" value="0" type="checkbox">Perform altruistic activities<br>
+		<input name="6_q1" id="6_q1" value="1" type="checkbox">Participate in spiritual activities<br>
+		<input name="6_q1" id="6_q1" value="2" type="checkbox">Work<br>
+		<input name="6_q1" id="6_q1" value="3" type="checkbox">Attend school<br>
+		<input name="6_q1" id="6_q1" value="4" type="checkbox">None of the above<br>
+
+		</form>
+
+
+				<button type="button" class="btn prev_q" divId="guide_5">Back</button>
+
+		<button type="button" class="btn next_q" divId="guide_7">Next</button>
+	</div>
+
+
+	<div class='guide_item' id='guide_7'>
+		<form id="form_7">
+		<h3 class='guide_item_title'>7. REDUCE high-risk behaviors</h3>
+			
+			<p>I have educated the patient about the following high risk behaviors (select all that apply):</p> 
+			<input name="7_q1" id="7_q1" value="0" type="checkbox">Cigarette smoking<br>
+			<input name="7_q1" id="7_q1" value="1" type="checkbox">Alcohol abuse<br>
+			<input name="7_q1" id="7_q1" value="2" type="checkbox"> Drug abuse<br>
+			<input name="7_q1" id="7_q1" value="3" type="checkbox"> High risk sexual behavior<br>
+			<input name="7_q1" id="7_q1" value="4" type="checkbox"> None of the above is relevant<br>
+
+		</form>
+		<button type="button" class="btn prev_q" divId="guide_6">Back</button>
+
+
+		<button type="button" class="btn next_q" divId="guide_8">Next</button>
+	</div>
+
+
+	<div class='guide_item' id='guide_8'>
+		<h3 class='guide_item_title'>8. BE CULTURALLY ATTUNED to differences</h3>
+
+		<form id="form_8">
+			<p>I have knowledge of how the patient’s culture influences their way of thinking about their illness:</p>
+			<input name="8_q1" id="8_q1" value="4" type="radio"> Yes <br>
+			<input name="8_q1" id="8_q1" value="3" type="radio"> Yes, I am from the same culture <br>
+			<input name="8_q1" id="8_q1" value="2" type="radio"> No <br>
+			<input name="8_q1" id="8_q1" value="1" type="radio"> No, but I would like to learn more <br>
+			<input name="8_q1" id="8_q1" value="0" type="radio"> Not relevant<br><br>
+
+
+			<p>I am trained on how to work in a culturally sensitive manner with medical interpreters: </p>
+			<input name="8_q2" id="8_q2" value="0" type="radio"> Yes <br>
+			<input name="8_q2" id="8_q2" value="0" type="radio"> No <br>
+			<input name="8_q2" id="8_q2" value="0" type="radio"> No, but I would like to learn more <br>
+			<input name="8_q2" id="8_q2" value="0" type="radio"> Not relevant <br><br>
+
+
+			<p>I am aware that people with mental illness are stigmatized in the patient’s culture: </p> 
+			<input name="8_q3" id="8_q3" value="1" type="radio"> Yes <br>
+			<input name="8_q3" id="8_q3" value="0" type="radio"> No <br>
+			<input name="8_q3" id="8_q3" value="2" type="radio"> Not relevant <br>
+
+
+			<p>I know my own culture’s folk diagnoses of mental disorders:</p>
+			<input name="8_q4" id="8_q4" value="1" type="radio"> Yes <br>
+			<input name="8_q4" id="8_q4" value="0" type="radio"> No <br>
+
+
+			<p>I am aware of traditional healing practices: </p> 
+			<input name="8_q5" id="8_q5" value="0" type="radio"> Yes <br>
+			<input name="8_q5" id="8_q5" value="0" type="checkbox"> I use traditional healing practices for my patients <br>
+			<input name="8_q5" id="8_q5" value="0" type="checkbox"> I am training to use traditional healing practices for my patients <br>
+			<input name="8_q5" id="8_q5" value="0" type="checkbox"> I have been treated using traditional healing practices myself <br>
+			<input name="8_q5" id="8_q5" value="0" type="radio">No <br>
+			<input name="8_q5" id="8_q5" value="0" type="radio">No, but I would like to learn more<br>
+		</form>
+		<button type="button" class="btn prev_q" divId="guide_7">Back</button>
+		<button type="button" class="btn next_q" divId="guide_9">Next</button>
+	</div>
+
+
+	<div class='guide_item' id='guide_9'>
+		<h3 class='guide_item_title'>9. PRESCRIBE psychotropic drugs if necessary</h3>
+
+		<form id="form_9">
+			<p>I used good judgment for the proper dosage and considered side effects of all medication I have prescribed based upon the patient’s ethnic background:</p>
+			<input name="9_q1" id="9_q1" value="0" type="radio"> Yes <br>
+			<input name="9_q1" id="9_q1" value="0" type="radio"> No <br>
+			<input name="9_q1" id="9_q1" value="0" type="radio"> Unsure, I would like to learn more<br>
+
+			<p>I am aware of ethnopsychopharmacology</p> 
+			<input name="9_q2" id="9_q2" value="1" type="radio"> Yes <br>
+			<input name="9_q2" id="9_q2" value="0" type="radio"> No <br>
+			<input name="9_q2" id="9_q2" value="2" type="radio"> No, but I would like to learn more<br>
+		</form>
+		<button type="button" class="btn prev_q" divId="guide_8">Back</button>
+		<button type="button" class="btn next_q" divId="guide_10">Next</button>
+	</div>
+
+
+	<div class='guide_item' id='guide_10'>
+		<h3 class='guide_item_title'>10. CLOSE AND SCHEDULE follow up visits</h3>
+		<form id="form_10">
+			<p>I closed the session by:</p>
+
+			<input name="10_q1" id="10_q1" value="0" type="checkbox"> Telling the patient I will pick up their trauma story during the next visit<br>
+
+			<input name="10_q1" id="10_q1" value="1" type="checkbox"> Writing a note in the chart to remind myself of the patient’s personal narrative<br>
+			<input name="10_q1" id="10_q1" value="2" type="checkbox">Planning to collect the patient’s traumatic life history over the course of multiple visits o Scheduling a regular follow-up<br>
+			<input name="10_q1" id="10_q1" value="3" type="checkbox"> None of the above<br>
+		</form>
+		<button type="button" class="btn prev_q" divId="guide_9">Back</button>
+		<button type="button" class="btn next_q" divId="guide_11">Next</button>
+	</div>
+
+	<div class='guide_item' id='guide_11'>
+		<h3 class='guide_item_title'>11. PREVENT BURNOUT: discuss with colleagues</h3>
+
+		<form id="form_11">
+			<p>I have had an opportunity to discuss my difficult and upsetting cases with colleagues:</p> 
+			<input name="11_q1" id="11_q1" value="1" type="radio">Yes<br>
+			<input name="11_q1" id="11_q1" value="0" type="radio">No<br>
+		
+			<p>I regularly attend Balint Groups</p> 
+			<input name="11_q2" id="11_q2" value="3" type="radio">Yes<br>
+			<input name="11_q2" id="11_q2" value="2" type="radio">No<br>
+			<input name="11_q2" id="11_q2" value="1" type="radio">No, I have not heard of Balint Groups before<br>
+			<input name="11_q2" id="11_q2" value="0" type="radio">No, I have not had the opportunity to attend a Balint Group<br>
+
+
+			<p>I am aware of the signs and symptoms of burn-out and secondary trauma:</p> 
+			<input name="11_q3" id="11_q3" value="1" type="radio">Yes<br>
+			<input name="11_q3" id="11_q3" value="0" type="radio">No<br>
+			<input name="11_q3" id="11_q3" value="2" type="radio">Unsure, I would like to learn more<br>
+
+			<button type="button" class="btn prev_q" divId="guide_9">Back</button><br>
+
+		</form>
+		<input id="submit" type="submit" value="submit"/>
+	</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+	var check_list1 = 
+["Beating, Kicking, striking with objects", "Wounding, Maiming",
+"Burning",
+"Rape or Sexual Torture, mutilation of genitalia", 
+"Suffocation/ Asphyxiation",
+"Forced postures",
+"Stretching or hanging (incl. suspension from a rod by hands and feet)","Deprivation",
+"Sensory Stress",
+"Threats, psychological",
+"Made to witness others being tortured",
+"Pharmacological: non-therapeutic medicine administration)",
+"Dental",
+"Electrical: shocked repeatedly by electric instrument",
+"Severe Humiliation",
+ "Kidnapping and disappearances",
+ "Other (specify: ______________)",
+"Secondary Survivor (spouse, son, or daughter of a torture survivor)",
+
+"I did not ask about specific experiences"]
+
+	for (var i = 0; i < check_list1.length; i++) {
+		$("#1-yes-items").append("<input type='checkbox' value='" + i +"'>" + check_list1[i] + "<br>")
+	}
+
+	var answer_1 = new Array();
+
+
+	// var answer_2 = new Array();
+
+	// var answer_3 = new Array();
+
+	// var answer_3 = new Array();
+
+	// var inputs = $('#guide_1'), 
+	// 	names = [].map.call(inputs, function(input) {
+	// 		return.input.value;
+	// 	}).join('|');
+
+	$('#guide_1').show();
+	$('.next_q').bind('click', function () {
+		$('.guide_item').hide();
+		var divId = $(this).attr("divId");
+		$('#' + divId).show();
+	});
+
+	$('.prev_q').bind('click', function () {
+	$('.guide_item').hide();
+		var divId = $(this).attr("divId");
+		$('#' + divId).show();
+	});
+
+	$('#submit').bind('click', function () {
+
+		form_data = new Array();
+		for (var i = 0; i < 11; i++) {
+			data = (getFormData('#form_' + (i+1)));
+			form_data.push(data);
+		}
+
+		console.log(form_data);
+
+		$.ajax({
+			url: "http://localhost:5000/submit_guide",
+			type: "POST",
+			data: form_data,
+			success: function(data, textStatus, jqXHR)
+			{
+				// window.location.reload(true);
+			},
+			error: function (jqXHR, textStatus, errorTh) {
+				console.log("ERROR!");
+			}
+		});
+
+
+		// q_1 = $('form#q_1').serialize() 
+		// console.log("#1: " + q_1);
+
+
+		// 	var student_name = document.getElementById("student_name").value;
+		// 	var location_name = document.getElementById("location_name").value;
+		// 	var location_address = document.getElementById("location_address").value;
+
+		// 	var dropdown = document.getElementById("loc_neighborhood");
+
+		// 	var loc_neighborhood = dropdown.options[dropdown.selectedIndex].value;
+
+		// 	dropdown = document.getElementById("resource_type");
+		// 	var location_type = dropdown.options[dropdown.selectedIndex].value;
+
+		
+		// 	var geocoder = new google.maps.Geocoder();
+		// 	geocoder.geocode({'address':location_address}, function(results,status) {
+		// 			if (status == google.maps.GeocoderStatus.OK) {
+		// 				pos = results[0].geometry.location;
+		// 				var lat = pos["k"];
+					
+		// 				var lng = pos["D"];
+
+		// 				form_data = {"student" : student_name, "location_name":location_name, "location_address":location_address,  "location_type":location_type, "location_neighborhood":loc_neighborhood, "lat": lat, "lng":lng};
+
+		// 				$.ajax({
+		// 				//	url: "http://localhost:5000/submit_location",
+		// 					url: "http://tiu-proj.herokuapp.com/submit_location",
+		// 					type: "POST",
+		// 					data: form_data,
+		// 					success: function(data, textStatus, jqXHR)
+		// 					{
+		// 						window.location.reload(true);
+		// 					},
+		// 					error: function (jqXHR, textStatus, errorTh) {
+		// 						console.log("ERROR!");
+		// 					}
+		// 				});
+		// 			}
+		// 	});
+		// }
+
+
+		
+
+
+
+		alert("Success!")
+		// window.location.href = "/home";
+	});
+
+
+	// $.post('/guide', function(data) {
+	// 	alert("Data submitted: " + data);
+	// }); 
+
+
+
+function getFormData(dom_query){
+    var out = {};
+    var s_data = $(dom_query).serializeArray();
+    //transform into simple data/value object
+    for(var i = 0; i<s_data.length; i++){
+        var record = s_data[i];
+        out[record.name] = record.value;
+    }
+    return out;
+}
+
+		// $.get('/data/infoByLabel?label=Upstream', function (data, status) {
+
+	// });
+
+
+
+// 	$(button_id).click(function() {
+// 		$(".guide_item").hide();
+// 		count++;
+// 		var guide_id = "#guide_" + count;
+// 		var button_id = "#" + count + "_submit";
+// 		console.log("button: " + button_id);
+// 	$(guide_id).show();
+// });
+
+
+	// });
+
+
+	// $(button_id).bind("click", function() {
+	// 	var guide_id = "#guide_" + count;
+	// 	count++;
+	// 	   $(guide_id).show();
+	// 	});
+	
+
+	// $("#1_checkboxes").hide();
+	// $("#1_a").click(function() {
+	// 	$("#1_checkboxes").show();
+	// });
+
+
+	// $("#1_submit").hide();
+	// $("#1_final").click(function() {
+	// 	$("#1_submit").show();
+	// 	$('#1_submit').click(function() {
+	// 		$('#guide_2').show();
+
+	// 	});
+	// });
+
+	
+// $(document).ready(function () {
+//     $(".text").hide();
+//     $("#r1").click(function () {
+//         $(".text").show();
+//     });
+//     $("#r2").click(function () {
+//         $(".text").hide();
+//     });
+// });
+
+
+
+</script>
+
+
+
+
+

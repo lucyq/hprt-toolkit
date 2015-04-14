@@ -111,7 +111,7 @@ passport.use(new passportHttp.BasicStrategy(verifyCredentials));
 // 	// Pretend this is using a real database
 // 	if (username == password) {
 // 		done(null, {id: username, name: username}); // user object with other info		
-// 	} else {
+// 	} else {z
 // 		done(null,null); // no error but didn't authenticate correctly, validation failed
 // 	}
 // })); // also another mode
@@ -351,6 +351,13 @@ app.get('/hs_q', function(req,res){
 	});
 });
 
+app.get('/guide', function(req,res){
+	res.render('guide', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+});
+
 
 
 // ADDING DATA
@@ -388,6 +395,45 @@ app.post('/new_patient', function(req, res, next) {
 				// 		res.send("You've already submitted a hypothesis!");
 				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
 							'dob':dob, 'gender':gender, 'created_at':created_at, 'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
+					res.redirect('/guide')
+					// res.redirect('/questionnaires')
+				});		
+			}
+
+		});
+	});
+
+});
+
+
+app.post('/hs_q', function(req, res, next) {
+	mongo.Db.connect(mongoUri, function(err, db) {
+		if (err) {
+			res.send("Error connecting to database!");
+		}
+		db.collection('HPRT_patients', function(err, col) {
+			if (err) {
+				res.send("Database error!");
+			}
+
+			var first_name = req.body.first_name;
+			var last_name = req.body.last_name;
+	
+			var empty_array = {};
+
+			// TODO: CHECK FOR NULL
+			if (first_name == null || last_name == null || location == null || dob == null ||
+				curr_age == null || gender == null || 
+				first_name == " " || last_name == " " || location == " " || dob == " " ||
+				curr_age == " " || gender == " ") {
+				res.send("Missing fields!");
+			} else {
+				// TODO: check that patient doesn't already exist
+				// col.find({'student':student}).toArray(function(err, items){
+				// 	if (items.length != 0) {
+				// 		res.send("You've already submitted a hypothesis!");
+				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
+							'dob':dob, 'gender':gender, 'created_at':created_at, 'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
 					res.redirect('/questionnaires')
 				});		
 			}
@@ -396,6 +442,7 @@ app.post('/new_patient', function(req, res, next) {
 	});
 
 });
+
 
 
 // DATA RETRIEVAL
@@ -485,7 +532,7 @@ app.post("/submit_hypothesis", function(req, res, next) {
 /////////////////////
 //   S E R V E R   //
 /////////////////////
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
 	console.log("Listening in port " + port);
