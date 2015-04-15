@@ -5,6 +5,21 @@
 	.guide_item {
 		display: none;
 	}	
+	.form {
+		padding: 10px;
+		margin: 10px;
+	}
+
+	p {
+		padding-top: 5px;
+	}
+
+	input[type="radio"] {
+	  margin-right: 0;
+	  padding: 3px;
+	}
+
+
 </style>
 
 
@@ -13,6 +28,7 @@
 	<div class='guide_item' id='guide_1'>
 		<h3 class='guide_item_title'>1. ASK</h3>
 		<form id="form_1"> 
+			Did you ask the patient the trauma story?
 			<input id="1_q1" name="1_q1" type="radio" value="1"/> Yes<br>
 			<input id="1_q1" name="1_q1" type="radio" value="0"/> No<br>
 		</form>
@@ -41,7 +57,7 @@
 
 
 
-		<button type="button" class="btn next_q" divId="guide_2">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_2">Next</button>
 
 	</div>
 	
@@ -73,9 +89,9 @@
 		</form>
 
 
-		<button type="button" class="btn prev_q" divId="guide_1">Back</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_1">Back</button>
 
-		<button type="button" class="btn next_q" divId="guide_3">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_3">Next</button>
 
 	</div>
 
@@ -122,9 +138,9 @@
 			</form>
 
 
-		<button type="button" class="btn prev_q" divId="guide_2">Back</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_2">Back</button>
 
-		<button type="button" class="btn next_q" divId="guide_4">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_4">Next</button>
 
 	</div>
 
@@ -150,9 +166,9 @@
 		</form>
 
 
-		<button type="button" class="btn prev_q" divId="guide_3">Back</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_3">Back</button>
 
-		<button type="button" class="btn next_q" divId="guide_5">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_5">Next</button>
 	</div>
 	<br>
 
@@ -178,9 +194,9 @@
 
 
 
-		<button type="button" class="btn prev_q" divId="guide_4">Back</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_4">Back</button>
 
-		<button type="button" class="btn next_q" divId="guide_6">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_6">Next</button>
 	</div>
 
 
@@ -198,9 +214,9 @@
 		</form>
 
 
-				<button type="button" class="btn prev_q" divId="guide_5">Back</button>
+				<button type="button" class="btn btn-default prev_q" divId="guide_5">Back</button>
 
-		<button type="button" class="btn next_q" divId="guide_7">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_7">Next</button>
 	</div>
 
 
@@ -216,10 +232,10 @@
 			<input name="7_q1" id="7_q1" value="4" type="checkbox"> None of the above is relevant<br>
 
 		</form>
-		<button type="button" class="btn prev_q" divId="guide_6">Back</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_6">Back</button>
 
 
-		<button type="button" class="btn next_q" divId="guide_8">Next</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_8">Next</button>
 	</div>
 
 
@@ -261,8 +277,8 @@
 			<input name="8_q5" id="8_q5" value="0" type="radio">No <br>
 			<input name="8_q5" id="8_q5" value="0" type="radio">No, but I would like to learn more<br>
 		</form>
-		<button type="button" class="btn prev_q" divId="guide_7">Back</button>
-		<button type="button" class="btn next_q" divId="guide_9">Next</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_7">Back</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_9">Next</button>
 	</div>
 
 
@@ -280,8 +296,8 @@
 			<input name="9_q2" id="9_q2" value="0" type="radio"> No <br>
 			<input name="9_q2" id="9_q2" value="2" type="radio"> No, but I would like to learn more<br>
 		</form>
-		<button type="button" class="btn prev_q" divId="guide_8">Back</button>
-		<button type="button" class="btn next_q" divId="guide_10">Next</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_8">Back</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_10">Next</button>
 	</div>
 
 
@@ -296,8 +312,8 @@
 			<input name="10_q1" id="10_q1" value="2" type="checkbox">Planning to collect the patient’s traumatic life history over the course of multiple visits o Scheduling a regular follow-up<br>
 			<input name="10_q1" id="10_q1" value="3" type="checkbox"> None of the above<br>
 		</form>
-		<button type="button" class="btn prev_q" divId="guide_9">Back</button>
-		<button type="button" class="btn next_q" divId="guide_11">Next</button>
+		<button type="button" class="btn btn-default prev_q" divId="guide_9">Back</button>
+		<button type="button" class="btn btn-default next_q" divId="guide_11">Next</button>
 	</div>
 
 	<div class='guide_item' id='guide_11'>
@@ -320,7 +336,7 @@
 			<input name="11_q3" id="11_q3" value="0" type="radio">No<br>
 			<input name="11_q3" id="11_q3" value="2" type="radio">Unsure, I would like to learn more<br>
 
-			<button type="button" class="btn prev_q" divId="guide_9">Back</button><br>
+			<button type="button" class="btn btn-default prev_q" divId="guide_9">Back</button><br>
 
 		</form>
 		<input id="submit" type="submit" value="submit"/>
@@ -406,7 +422,7 @@
 			data: form_data,
 			success: function(data, textStatus, jqXHR)
 			{
-				// window.location.reload(true);
+				window.location.reload(true);
 			},
 			error: function (jqXHR, textStatus, errorTh) {
 				console.log("ERROR!");
@@ -416,6 +432,7 @@
 
 
 		alert("Success!")
+		window.location.href = "/home";
 	});
 
 

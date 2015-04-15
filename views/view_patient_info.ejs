@@ -55,21 +55,13 @@
 
 
 	function renderList() {
-
-		console.log("data: "  + data);
-
-		 var school_name;
-		 var location_name;
-		 var instructor_name;
-
 		for (k in data) {
-			console.log(data[k])
 			first_name = data[k]["first_name"];
 			last_name = data[k]["last_name"];
 			dob = data[k]["dob"];
 	
-			$("#my_patients").append("<h4 style='text-align: left'> Name: " + first_name + " " 
-									+ last_name +"<br>Date of Birth: " + dob + "</h4><br>");
+			$("#my_patients").append("<h4 style='text-align: left'> Name: <a href='#'>" + first_name + " " 
+									+ last_name +"</a><br>Date of Birth: " + dob + "</h4><br>");
 		}
 	}
 

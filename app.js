@@ -165,7 +165,7 @@ app.get('/create_user', function(req, res) {
 
 app.post('/create_user', function(req, res, next){
 	mongo.Db.connect(mongoUri, function(err, db) {
-		db.collection('HPRT_accounts', function(err, col){
+		db.collection('users', function(err, col){
 			var username = req.body.username;
 			var email = req.body.email;
 			var role = req.body.role_type;
@@ -211,7 +211,7 @@ app.post('/create_user', function(req, res, next){
 
 app.post('/create_account', function(req, res) {
 	mongo.Db.connect(mongoUri, function(err, db) {
-		db.collection('HPRT_accounts', function(err, col) {
+		db.collection('users', function(err, col) {
 			var username = req.body.username;
 			var email = req.body.email;
 			var first_name = req.body.first_name;
@@ -348,11 +348,19 @@ app.get('/guide', function(req,res){
 	});
 });
 
+app.get('/surveys', function(req,res) {
+	res.render('surveys', {
+		isAuthenticated: req.isAuthenticated(),
+		user: req.user
+	});
+
+});
+
 
 
 // ADDING DATA
 app.post('/submit_guide', function(req, res) {
-	console.log("HERE?");
+
 	mongo.Db.connect(mongoUri, function(err, db) {
 		if (err) {
 			res.send("Error connection to database!");
@@ -381,13 +389,17 @@ app.post('/new_patient', function(req, res, next) {
 			var first_name = req.body.first_name;
 			var last_name = req.body.last_name;
 			var location = req.body.location;
+			var origin = req.body.origin;
 			var dob = req.body.date_of_birth;
+			var lang = req.body.languages;
 			var curr_age = req.body.curr_age;
+			var ethnic = req.body.ethnic;
 			var gender = req.body.gender;
 			var created_at = new Date();
-			// var htq_records[];
-			// var hsq_records[];
-			var empty_array = {};
+
+			var htq_records[];
+			var hsq_records[];
+			var 11_point_records[];
 
 			// TODO: CHECK FOR NULL
 			if (first_name == null || last_name == null || location == null || dob == null ||
@@ -396,15 +408,18 @@ app.post('/new_patient', function(req, res, next) {
 				curr_age == " " || gender == " ") {
 				res.send("Missing fields!");
 			} else {
-				// TODO: check that patient doesn't already exist
-				// col.find({'student':student}).toArray(function(err, items){
-				// 	if (items.length != 0) {
-				// 		res.send("You've already submitted a hypothesis!");
-				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
-							'dob':dob, 'gender':gender, 'created_at':created_at,  'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
-					res.redirect('/guide')
-					// res.redirect('/questionnaires')
-				});		
+				
+				col.find({'first_name':first_name, 'last_name': last_name}).toArray(function(err, items){
+				if (items.length != 0) {
+					res.send("Patient exists already!");
+				}else {
+					col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 'ethnicity': ethnic,
+								'origin': origin,
+								'dob':dob, 'languages': lang,'gender':gender, 'created_at':created_at, '11_point_records': [],  'htq_records': [], 
+								'hsq_records': []}, function(err, items) {
+						res.redirect('/surveys')
+					});	
+				}
 			}
 
 		});
@@ -463,11 +478,11 @@ app.get("/find_patient", function(req, res, next) {
 			if (first_name == null || last_name == null || dob == null) {
 				res.send("Missing fields!");
 			} else {
-				col.find({'first_name':first_name, 'last_name':last_name, 'dob':dob}).toArray(function(err, items) {
+				col.find({'first_name':first_name, 'last_name':last_name}).toArray(function(err, items) {
 					if (items.length == 0) {
 						res.send("Patient doesn't exist!");
 					} else {
-						res.send(JSON.stringify(items[0]));
+						res.send(JSON.stringify(items));
 					}
 				});
 			}
@@ -478,7 +493,7 @@ app.get("/find_patient", function(req, res, next) {
 app.get("/get_my_patients", function (req, res) {
 	mongo.Db.connect(mongoUri, function (err, db) {
 		var user = req.query.user;
-		// db.collection('HPRT_accounts', function (err, col) {
+		// db.collection('users', function (err, col) {
 		// 	col.find({'username': user}).toArray(function(err, items) {
 
 

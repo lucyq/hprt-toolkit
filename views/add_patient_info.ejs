@@ -5,8 +5,8 @@
 <div class="content">
 
 	<h2>
-		<span class="toggle_forms" divId="new_patient">New Patient</span>
-		<span class="toggle_forms" divId="existing_patient">Existing Patient</span>
+		<button class="btn btn-default btn-lg"><span class="toggleForms" divId="new_patient">New Patient</span></button>
+		<button class="btn btn-default btn-lg"><span class="toggleForms" divId="existing_patient">Existing Patient</span></button>
 	</h2>
 
 
@@ -16,8 +16,13 @@
 		<form method="post" action="/new_patient">
 			First Name:<br> <input class="textbox_forms" type="text" name="first_name"/><br><br>
 			Last Name:<br> <input class="textbox_forms" type="text" name="last_name"/><br><br>
-
-			Location:<br> <input class="textbox_forms" type="text" name="location"/><br><br>
+			Country of Origin:<br> <input class="textbox_forms" type="text" name="origin"/><br><br>
+			Current Location:<br> <input class="textbox_forms" type="text" name="location"/><br><br>
+			<!-- drop down -->
+			Ethnic Background:<br> <input class="textbox_forms" type="text" name="ethnic"/><br><br>
+			<!-- Drop down -->
+			Languages Spoken:<br> <input class="textbox_forms" type="text" name="lang"/><br><br>
+			<!-- Drop down -->
 			Date of Birth:<br> <input class="textbox_forms" type="text" name="date_of_birth"/><br><br>
 			Current Age:<br> <input class="textbox_forms" type="text" name="curr_age"/><br><br>
 			Gender:<br> <input class="textbox_forms" type="text" name="gender"/><br><br>
@@ -59,7 +64,7 @@
 
 
 <script> 
-    $(".toggle_forms").bind("click", function() {
+    $(".toggleForms").bind("click", function() {
          $(".content_forms").hide();
          var divId = $(this).attr("divId");
         $("#" + divId).slideToggle('slow', function() {});
