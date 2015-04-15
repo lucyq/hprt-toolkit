@@ -7,12 +7,18 @@
 <div class="content">
 
 	<h2>
-		<span class="toggle_forms" divId="new_patient">View My Patients</span>
+		<span class="toggle_forms" divId="my_patients">View My Patients</span>
 		<span class="toggle_forms" divId="existing_patient">Find a Patient</span>
 	</h2>
 
 
-<div class="forms content_forms" id="existing_patient">
+	<div class="forms content_forms" id="my_patients">
+		<h2 style="text align: left">My Patients</h2>
+
+
+	</div>
+
+	<div class="forms content_forms" id="existing_patient">
 		<h2 style="text-align: left">Find Existing Patient</h2>	
 		<form method="get" action="/find_patient">
 			First Name:<br> <input class="textbox_forms" type="text" name="first_name"/><br><br>
@@ -31,4 +37,45 @@
         $("#" + divId).slideToggle('slow', function() {});
       //  $("#" + divId).show();
       });
+
+
+
+    var data;
+
+
+	var request = new XMLHttpRequest(); 
+		request.open("GET", "/get_my_patients", true);
+		request.send();
+		request.onreadystatechange = function() {
+			if (request.readyState==4 && request.status==200) {
+				data = JSON.parse(request.responseText);
+				renderList();
+			}
+	};
+
+
+	function renderList() {
+
+		console.log("data: "  + data);
+
+		 var school_name;
+		 var location_name;
+		 var instructor_name;
+
+		for (k in data) {
+			console.log(data[k])
+			first_name = data[k]["first_name"];
+			last_name = data[k]["last_name"];
+			dob = data[k]["dob"];
+	
+			$("#my_patients").append("<h4 style='text-align: left'> Name: " + first_name + " " 
+									+ last_name +"<br>Date of Birth: " + dob + "</h4><br>");
+		}
+	}
+
+
+
+
+
+
 </script>	

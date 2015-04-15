@@ -150,18 +150,6 @@ function ensureAuthorized(req, res, next) {
 /////////////////////
 //   R O U T E S   //
 /////////////////////
-app.use('/api', passport.authenticate('basic', { session: false})); // reauthenticate
-
-app.get('/api/data', ensureAuthorized, function(req, res) {
-	res.json([
-		{value: 'foo'},
-		{value: 'bar'},
-		{value: 'baz'}]);
-});
-
-
-
-
 
 // ACCOUNT MANAGEMENT
 app.post('/login', passport.authenticate('local'), function(req,res) {
@@ -233,6 +221,8 @@ app.post('/create_account', function(req, res) {
 			var phone_num = req.body.phone_num;
 			var ver_code = req.body.ver_code;
 
+			var patients = new Array();
+
 			if (username == null || email == null || first_name == null || last_name == null ||
 				password == null || ver_password == null || phone_num == null || 
 				username == " " || email == " " || first_name == " " || last_name == " " ||
@@ -244,7 +234,7 @@ app.post('/create_account', function(req, res) {
 						res.send("user doesn't exist");
 					} else {
 						if (items[0].ver_code == ver_code) {
-							col.update({'username':username}, {$set: {password:password, email:email, first_name:first_name, last_name:last_name, phone_num:phone_num}});
+							col.update({'username':username}, {$set: {password:password, email:email, first_name:first_name, last_name:last_name, phone_num:phone_num, patients: patients}});
 						}
  					}
 				});
@@ -254,12 +244,12 @@ app.post('/create_account', function(req, res) {
 });
 	
 
-app.get('/login', function(req, res) {
-	res.render('login', {
-		isAuthenticated: req.isAuthenticated(), 
-		user: req.user		
-	});
-});
+// app.get('/login', function(req, res) {
+// 	res.render('login', {
+// 		isAuthenticated: req.isAuthenticated(), 
+// 		user: req.user		
+// 	});
+// });
 
 app.get('/create_account', function(req, res) {
 	res.render('create_account', {
@@ -361,6 +351,23 @@ app.get('/guide', function(req,res){
 
 
 // ADDING DATA
+app.post('/submit_guide', function(req, res) {
+	console.log("HERE?");
+	mongo.Db.connect(mongoUri, function(err, db) {
+		if (err) {
+			res.send("Error connection to database!");
+		}
+		db.collection('HPRT_patients', function(err,col) {
+			if (err) {
+				res.send("Database error!");
+			}
+
+
+		});
+	});
+});
+
+
 app.post('/new_patient', function(req, res, next) {
 	mongo.Db.connect(mongoUri, function(err, db) {
 		if (err) {
@@ -394,7 +401,7 @@ app.post('/new_patient', function(req, res, next) {
 				// 	if (items.length != 0) {
 				// 		res.send("You've already submitted a hypothesis!");
 				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 
-							'dob':dob, 'gender':gender, 'created_at':created_at, 'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
+							'dob':dob, 'gender':gender, 'created_at':created_at,  'htq_records': empty_array, 'hsq_records': empty_array}, function(err, items) {
 					res.redirect('/guide')
 					// res.redirect('/questionnaires')
 				});		
@@ -468,71 +475,31 @@ app.get("/find_patient", function(req, res, next) {
 	});
 });
 
-/*
-
-app.get("/find_user_byName", function(request, response, next){
-  mongo.Db.connect(mongoUri, function (err, db) {
-    db.collection('users', function(er, collection) {
-        var username = request.query.username;
-
-        if (username == null || username == ""){
-          response.send("Missing fields");
-        } else {
-          collection.find({'username':username}).toArray(function(err, items) {
-            if (items.length == 0){
-              response.send("No such user");
-            } else {
-              response.send(JSON.stringify(items[0]));
-            }
-          }); 
-        }
-      });
-    });
-});
-*/
+app.get("/get_my_patients", function (req, res) {
+	mongo.Db.connect(mongoUri, function (err, db) {
+		var user = req.query.user;
+		// db.collection('HPRT_accounts', function (err, col) {
+		// 	col.find({'username': user}).toArray(function(err, items) {
 
 
-/* 
 
-
-app.post("/submit_hypothesis", function(req, res, next) {
-	mongo.Db.connect(mongoUri, function(err, db) {
-		if (err) {
-			res.send("Error connecting to database!");
-		}
-		db.collection('TIU_submissions', function(err, col) {
-			if (err) {
-				res.send("Database Error!");
-			}
-			var student = req.body.student_name;
-			var hypothesis = req.body.hypothesis;
-			var time = new Date();
-
-			if (student == null || hypothesis == null ||
-				student == "" || hypothesis == "") {
-				res.send("Missing Fields!");
-			} else {
-				col.find({'student':student}).toArray(function(err, items){
-					if (items.length != 0) {
-						res.send("You've already submitted a hypothesis!");
-					} else {
-						col.insert({'student':student, 'hypothesis':hypothesis, 'created_at':time}, function(err, items) {
-							res.redirect('hypothesis');
-						});		
-					}
-				});
-			}
+		// 	});
+		// });
+		db.collection('HPRT_patients', function(err, col) {
+			col.find().toArray(function(err, items){
+				res.send(JSON.stringify(items));
+			});
 		});
 	});
 });
-*/
+
 
 
 
 /////////////////////
 //   S E R V E R   //
 /////////////////////
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 
 app.listen(port, function() {
 	console.log("Listening in port " + port);
