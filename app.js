@@ -188,8 +188,8 @@ app.post('/create_user', function(req, res, next){
 						// 	text: "Hello! Here is your login information. Use the information below to finish creating your account! Username: " + username + "Verification code: " + ver_code + "hprt-toolkit.heroku.com/create_account";
 						// }, function(err, json) {
 						// 	if (err) {return console.error(err); }
-						// 	console.log(json);
-						// });
+						// 	consolog(json);
+						// });le.
 						col.insert({'username':username,
 							'email':email,
 							'password': " ",
@@ -201,7 +201,7 @@ app.post('/create_user', function(req, res, next){
      						'patients':patients,
      						'created_at':created_at
     					});
-						res.redirect('/create_user');
+						res.redirect('/home');
 					}
 				});
 			}
@@ -377,53 +377,52 @@ app.post('/submit_guide', function(req, res) {
 
 
 app.post('/new_patient', function(req, res, next) {
-	mongo.Db.connect(mongoUri, function(err, db) {
-		if (err) {
-			res.send("Error connecting to database!");
-		}
-		db.collection('HPRT_patients', function(err, col) {
-			if (err) {
-				res.send("Database error!");
-			}
+	// mongo.Db.connect(mongoUri, function(err, db) {
+	// 	if (err) {
+	// 		res.send("Error connecting to database!");
+	// 	}
+	// 	db.collection('HPRT_patients', function(err, col) {
+	// 		if (err) {
+	// 			res.send("Database error!");
+	// 		}
 
-			var first_name = req.body.first_name;
-			var last_name = req.body.last_name;
-			var location = req.body.location;
-			var origin = req.body.origin;
-			var dob = req.body.date_of_birth;
-			var lang = req.body.languages;
-			var curr_age = req.body.curr_age;
-			var ethnic = req.body.ethnic;
-			var gender = req.body.gender;
-			var created_at = new Date();
+	// 		var first_name = req.body.first_name;
+	// 		var last_name = req.body.last_name;
+	// 		var location = req.body.location;
+	// 		var origin = req.body.origin;
+	// 		var dob = req.body.date_of_birth;
+	// 		var lang = req.body.languages;
+	// 		var curr_age = req.body.curr_age;
+	// 		var ethnic = req.body.ethnic;
+	// 		var gender = req.body.gender;
+	// 		var created_at = new Date();
 
-			var htq_records[];
-			var hsq_records[];
-			var 11_point_records[];
+	// 		var htq_records = [];
+	// 		var hsq_records = [];
 
-			// TODO: CHECK FOR NULL
-			if (first_name == null || last_name == null || location == null || dob == null ||
-				curr_age == null || gender == null || 
-				first_name == " " || last_name == " " || location == " " || dob == " " ||
-				curr_age == " " || gender == " ") {
-				res.send("Missing fields!");
-			} else {
+	// 		// TODO: CHECK FOR NULL
+	// 		if (first_name == null || last_name == null || location == null || dob == null ||
+	// 			curr_age == null || gender == null || 
+	// 			first_name == " " || last_name == " " || location == " " || dob == " " ||
+	// 			curr_age == " " || gender == " ") {
+	// 			res.send("Missing fields!");
+	// 		} else {
 				
-				col.find({'first_name':first_name, 'last_name': last_name}).toArray(function(err, items){
-				if (items.length != 0) {
-					res.send("Patient exists already!");
-				}else {
-					col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 'ethnicity': ethnic,
-								'origin': origin,
-								'dob':dob, 'languages': lang,'gender':gender, 'created_at':created_at, '11_point_records': [],  'htq_records': [], 
-								'hsq_records': []}, function(err, items) {
-						res.redirect('/surveys')
-					});	
-				}
-			}
+	// 			col.find({'first_name':first_name, 'last_name': last_name}).toArray(function(err, items){
+	// 			if (items.length != 0) {
+	// 				res.send("Patient exists already!");
+	// 			}else {
+	// 				col.insert({'first_name':first_name, 'last_name':last_name, 'location':location, 'ethnicity': ethnic,
+	// 							'origin': origin,
+	// 							'dob':dob, 'languages': lang,'gender':gender, 'created_at':created_at, '11_point_records': [],  'htq_records': [], 
+	// 							'hsq_records': []}, function(err, items) {
+	// 					res.redirect('/surveys')
+	// 				});	
+	// 			}
+	// 		}
 
-		});
-	});
+	// 	});
+	// });
 
 });
 
